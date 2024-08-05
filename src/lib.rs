@@ -577,6 +577,7 @@ pub struct Document {
     paper_size: Size,
     decorator: Option<Box<dyn PageDecorator>>,
     conformance: Option<printpdf::PdfConformance>,
+    pub current_page: usize
 }
 
 impl Document {
@@ -591,6 +592,7 @@ impl Document {
             paper_size: PaperSize::A4.into(),
             decorator: None,
             conformance: None,
+            current_page: 1
         }
     }
 
@@ -724,6 +726,7 @@ impl Document {
                     ));
                 }
                 renderer.add_page(self.paper_size);
+                self.current_page+=1;
             } else {
                 break;
             }
